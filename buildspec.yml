@@ -10,6 +10,9 @@ phases:
     commands:
       - echo Entered the build phase...
       - mvn clean package
+      - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sample1234
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
   post_build:
     commands:
       - echo Build completed successfully
